@@ -16,6 +16,11 @@ const initialState = {
 export default class AppClass extends React.Component {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
+  constructor(props) {
+    super(props);
+    this.state = { ...initialState }
+
+  } 
 
   getXY = () => {
     // It it not necessary to have a state to track the coordinates.
@@ -28,14 +33,23 @@ export default class AppClass extends React.Component {
     // returns the fully constructed string.
   }
 
-  reset = () => {
+  reset = (e) => {
     // Use this helper to reset all states to their initial values.
+  
+   
   }
 
   getNextIndex = (direction) => {
     // This helper takes a direction ("left", "up", etc) and calculates what the next index
     // of the "B" would be. If the move is impossible because we are at the edge of the grid,
     // this helper should return the current index unchanged.
+  }
+
+  setEmail = (evt) => {
+    this.setState({
+      ...this.state,
+      email: evt.target.value
+    })
   }
 
   move = (evt) => {
@@ -52,6 +66,8 @@ export default class AppClass extends React.Component {
   }
 
   render() {
+    console.log(this.state);
+    
     const { className } = this.props
     return (
       <div id="wrapper" className={className}>
@@ -76,10 +92,10 @@ export default class AppClass extends React.Component {
           <button id="up">UP</button>
           <button id="right">RIGHT</button>
           <button id="down">DOWN</button>
-          <button id="reset">reset</button>
+          <button onClick={this.reset} id="reset">reset</button>
         </div>
         <form>
-          <input id="email" type="email" placeholder="type email"></input>
+          <input id="email" type="email" value={this.state.email} onChange={this.setEmail} placeholder="type email"></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
