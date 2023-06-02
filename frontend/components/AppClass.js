@@ -43,6 +43,19 @@ export default class AppClass extends React.Component {
     // This helper takes a direction ("left", "up", etc) and calculates what the next index
     // of the "B" would be. If the move is impossible because we are at the edge of the grid,
     // this helper should return the current index unchanged.
+    if( direction === "left" ) {
+      if(this.state.x - 1 === 0) {
+        return ({
+          x: this.state.x,
+          y: this.state.y
+        })
+      }
+      return ({ 
+        x: this.state.x - 1,
+        y: this.state.y,
+        steps: this.state.steps + 1
+      })
+    }
   }
 
   setEmail = (evt) => {
@@ -88,7 +101,7 @@ export default class AppClass extends React.Component {
           <h3 id="message"></h3>
         </div>
         <div id="keypad">
-          <button id="left">LEFT</button>
+          <button onClick={this.getNextIndex} id="left">LEFT</button>
           <button id="up">UP</button>
           <button id="right">RIGHT</button>
           <button id="down">DOWN</button>
